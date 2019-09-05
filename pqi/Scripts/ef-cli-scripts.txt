@@ -1,0 +1,4 @@
+﻿
+
+dotnet ef dbcontext scaffold "Server=(local)\sqldev_12;Database=pqi;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -c RptContext -o Data/Contexts -t "TblPriceBook_Main" -f
+

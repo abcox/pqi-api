@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 
 namespace pqi
 {
@@ -26,6 +27,11 @@ namespace pqi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Agency EFT Service API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +46,23 @@ namespace pqi
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
+            var swaggerEndpoint = env.IsDevelopment() ? "/swagger/v1/swagger.json" : "http://ideanetworks.ca/quotes/swagger/v1/swagger.json";
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "swagger/{documentName}/swagger.json";
+            });
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint(swaggerEndpoint, "Quoting Service API");
+                options.RoutePrefix = "swagger/ui";
+            });
+
 
             app.UseHttpsRedirection();
             app.UseMvc();

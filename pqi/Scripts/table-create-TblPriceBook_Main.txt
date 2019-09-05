@@ -1,0 +1,133 @@
+﻿USE [pqi]
+GO
+
+/****** Object:  Table [dbo].[TblPriceBook_Main]    Script Date: 9/5/2019 8:07:18 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TblPriceBook_Main](
+	[Part_ID] [int] IDENTITY(1,1) NOT NULL,
+	[Section_ID] [int] NULL,
+	[Order_ID] [int] NULL,
+	[PartNumber] [varchar](255) NULL,
+	[AltPartNumber] [varchar](255) NULL,
+	[Description] [text] NULL,
+	[LongDescription] [text] NULL,
+	[CostRule] [text] NULL,
+	[PriceRule] [text] NULL,
+	[ItemDiscountRule] [text] NULL,
+	[Cost] [float] NULL,
+	[Price] [float] NULL,
+	[ItemDiscount] [float] NULL,
+	[LBCode] [varchar](50) NULL,
+	[LBQuantity] [float] NULL,
+	[LBCost] [float] NULL,
+	[LBPrice] [float] NULL,
+	[LBDiscount] [float] NULL,
+	[Units] [varchar](255) NULL,
+	[GroupName] [varchar](255) NULL,
+	[SupplierName] [varchar](255) NULL,
+	[DocName] [varchar](255) NULL,
+	[image] [varchar](50) NULL,
+	[CreatedOn] [datetime] NULL,
+	[CreatedBy] [varchar](255) NULL,
+	[UpdatedOn] [datetime] NULL,
+	[UpdatedBy] [varchar](255) NULL,
+	[IsKit] [bit] NOT NULL,
+	[ViewInWeb] [bit] NOT NULL,
+	[IsAssociated] [bit] NOT NULL,
+	[ShowInQuote] [bit] NULL,
+	[ts] [timestamp] NULL,
+	[IsBaseModel] [bit] NOT NULL,
+	[features] [text] NULL,
+	[MaterialCost] [float] NULL,
+	[StartingMargin] [float] NULL,
+	[SupplierCurrency] [varchar](75) NULL,
+	[LandedCost] [varchar](75) NULL,
+	[SellPrice] [varchar](75) NULL,
+	[Manufacturer] [varchar](75) NULL,
+	[Category] [varchar](75) NULL,
+	[Expense] [bit] NULL,
+	[Warehouse] [smallint] NULL,
+	[ShowInBOM] [bit] NULL,
+	[XlabourHrs] [varchar](75) NULL,
+ CONSTRAINT [PK_TblPriceBook_Main] PRIMARY KEY CLUSTERED 
+(
+	[Part_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_Order_ID]  DEFAULT (0) FOR [Order_ID]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_CostRule]  DEFAULT ('[RCost]') FOR [CostRule]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_PriceRule]  DEFAULT ('[RPrice]') FOR [PriceRule]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_ItemDiscountRule_1]  DEFAULT ('0') FOR [ItemDiscountRule]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_Cost]  DEFAULT (0) FOR [Cost]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_Price]  DEFAULT (0) FOR [Price]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_ItemDiscount]  DEFAULT (0) FOR [ItemDiscount]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_LBQuantity]  DEFAULT (0) FOR [LBQuantity]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_LBCost]  DEFAULT (0) FOR [LBCost]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_LBPrice]  DEFAULT (0) FOR [LBPrice]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_LBDiscount]  DEFAULT (0) FOR [LBDiscount]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_IsKit]  DEFAULT (0) FOR [IsKit]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_ViewInWeb_1]  DEFAULT (1) FOR [ViewInWeb]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_IsAssociated]  DEFAULT (0) FOR [IsAssociated]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_ShowInQuote]  DEFAULT (1) FOR [ShowInQuote]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_IsBaseModel]  DEFAULT (0) FOR [IsBaseModel]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_MaterialCost]  DEFAULT ((0)) FOR [MaterialCost]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_StartingMargin]  DEFAULT ((0.33)) FOR [StartingMargin]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_SupplierCurrency]  DEFAULT ('CDN') FOR [SupplierCurrency]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_LandedCost]  DEFAULT ('[RLandedCost]') FOR [LandedCost]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_SellPrice]  DEFAULT ('[Rprice]') FOR [SellPrice]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_Expense]  DEFAULT ((0)) FOR [Expense]
+GO
+
+ALTER TABLE [dbo].[TblPriceBook_Main] ADD  CONSTRAINT [DF_TblPriceBook_Main_ShowInBOM]  DEFAULT ((1)) FOR [ShowInBOM]
+GO
+
+
